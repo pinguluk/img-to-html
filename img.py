@@ -10,7 +10,8 @@ def rgb2hex(rgb):
     return hex
 
 
-image = cv2.imread("smaller.png")
+image = cv2.imread("image.png")
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 #contor
 i = 0
@@ -19,13 +20,14 @@ h = image.shape[0]
 w = image.shape[1]
 
 file = open('index.html', 'w')
-file.write('<!DOCTYPE html><html><head><style>#image{display:flex;flex-direction:column}.row div{display:inline-block;float:left;width:5px;height:5px;}</style></head><body><div id="image">')
+file.write('<!DOCTYPE html><html><head><style>#image{display:flex;flex-direction:column}.row div{display:inline-block;float:left;width:1px;height:1px;}</style></head><body><div id="image">')
 
 # loop over the image, pixel by pixel
 for y in range(0, h):
     file.write('<div class="row">')
     for x in range(0, w):
         hexValue = rgb2hex(image[y, x])
+        print(hexValue)
         file.write('<div style="background:' + hexValue + '"></div>')
         i = i + 1
     file.write('</div></body></html>')
