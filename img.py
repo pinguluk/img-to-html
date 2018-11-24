@@ -23,7 +23,7 @@ if (args.output):
 else:
     file = open('index.html', 'w')
 # write basic stuff
-file.write('<!DOCTYPE html><html><head><style>#image{display:flex;flex-direction:column}.row div{display:inline-block;float:left;width:1px;height:1px;}</style></head><body><div id="image">')
+file.write('<!DOCTYPE html><html><head><style>#image{display:flex;flex-direction:column}i{display:inline-block;float:left;width:1px;height:1px;}</style></head><body><div id="image">')
 
 #image height & width
 width, height = image.size
@@ -38,7 +38,7 @@ for y in range(height):
         # print(pixeldata[x, y])
         # if current pixel is transparent => write empty div
         if pixeldata[x, y][3] == 0:
-            file.write('<div></div>')
+            file.write('<i></i>')
         # else write the current pixel to hex value
         else:
             # rgbaValue = (r, g, b, a), where a = a / 255 (we need value between 0 and 1) & format to 2 decimals
@@ -49,11 +49,14 @@ for y in range(height):
             # if a == 0.00, set it to 0 so we minify the output
             if a == '0.00':
                 a = '0'
+            # else if a == 1.00, set it to 0 so we minify the output as well
+            elif a == '1.00':
+                a = '1'
             rgbaValue = "rgb(" +  r + ', ' +  g + ', ' + b +', ' + a + ")"
             # print rgbaValue
             #print(rgbaValue)
             # write current pixel
-            file.write('<div style="background:' + rgbaValue + '"></div>')
+            file.write('<i style="background:' + rgbaValue + '"></i>')
     # close row div
     file.write('</div>')
 
