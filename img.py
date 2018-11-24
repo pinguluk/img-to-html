@@ -1,4 +1,10 @@
 from PIL import Image
+import argparse, sys
+
+parser=argparse.ArgumentParser()
+parser.add_argument('-image', help='Image filename + extension')
+parser.add_argument('-output', help='Output filename + extension (should be .html)')
+args=parser.parse_args()
 
 # function rgb => hex
 def rgb2hex(rgb):
@@ -9,14 +15,19 @@ def rgb2hex(rgb):
     return hex
 
 # image name + extension
-filename = "2018.png"
+imageFileName = args.image
 # load image + convert to RGBA
-image = Image.open(filename).convert('RGBA')
+image = Image.open(imageFileName).convert('RGBA')
 # load pixels
 pixeldata = image.load()
 
 # open / create html file
-file = open('index.html', 'w')
+# take argument output file name if sety
+if (args.output):
+    file = open(args.output, 'w')
+# else use default 'index.html'
+else:
+    file = open('index.html', 'w')
 # write basic stuff
 file.write('<!DOCTYPE html><html><head><style>#image{display:flex;flex-direction:column}.row div{display:inline-block;float:left;width:1px;height:1px;}</style></head><body><div id="image">')
 
