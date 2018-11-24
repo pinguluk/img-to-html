@@ -6,20 +6,14 @@ parser.add_argument('-image', help='Image filename + extension')
 parser.add_argument('-output', help='Output filename + extension (should be .html)')
 args=parser.parse_args()
 
-# function rgb => hex
-def rgb2hex(rgb):
-    r = rgb[0]
-    g = rgb[1]
-    b = rgb[2]
-    hex = "#{:02x}{:02x}{:02x}".format(r,g,b)
-    return hex
-
 # image name + extension
 imageFileName = args.image
 # load image + convert to RGBA
 image = Image.open(imageFileName).convert('RGBA')
 # load pixels
 pixeldata = image.load()
+
+image.save("test.png")
 
 # open / create html file
 # take argument output file name if sety
@@ -47,8 +41,19 @@ for y in range(height):
             file.write('<div></div>')
         # else write the current pixel to hex value
         else:
-            hexValue = rgb2hex(pixeldata[x,y])
-            file.write('<div style="background:' + hexValue + '"></div>')
+            # rgbaValue = (r, g, b, a), where a = a / 255 (we need value between 0 and 1) & format to 2 decimals
+            r = str(pixeldata[x,y][0])
+            g = str(pixeldata[x,y][1])
+            b = str(pixeldata[x,y][2])
+            a = str(format(pixeldata[x,y][3]/255, '.2f'))
+            # if a == 0.00, set it to 0 so we minify the output
+            if a == '0.00':
+                a = '0'
+            rgbaValue = "rgb(" +  r + ', ' +  g + ', ' + b +', ' + a + ")"
+            # print rgbaValue
+            #print(rgbaValue)
+            # write current pixel
+            file.write('<div style="background:' + rgbaValue + '"></div>')
     # close row div
     file.write('</div>')
 
