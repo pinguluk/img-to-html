@@ -10,7 +10,7 @@ def rgb2hex(rgb):
     return hex
 
 
-image = cv2.imread("image.png")
+image = cv2.imread("logo.png")
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 #contor
@@ -27,7 +27,7 @@ for y in range(0, h):
     file.write('<div class="row">')
     for x in range(0, w):
         hexValue = rgb2hex(image[y, x])
-        print(hexValue)
+        #print(hexValue)
         file.write('<div style="background:' + hexValue + '"></div>')
         i = i + 1
     file.write('</div></body></html>')
