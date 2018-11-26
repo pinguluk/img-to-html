@@ -35,11 +35,11 @@ for y in range(height):
     # loop columns
     for x in range(width):
         # print current pixel
-        # print(pixeldata[x, y])
+        ## print(pixeldata[x, y])
         # if current pixel is transparent => write empty div
         if pixeldata[x, y][3] == 0:
             file.write('<i></i>')
-        # else write the current pixel to hex value
+        # else write the current pixel to rgb value
         else:
             # rgbaValue = (r, g, b, a), where a = a / 255 (we need value between 0 and 1) & format to 2 decimals
             r = str(pixeldata[x,y][0])
