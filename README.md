@@ -30,5 +30,5 @@ imgtohtml.py -img fish.png -output fish.html
 
 ## TODO
 
-- Find a better way to implement background-color to reduce the file size
+- Find a better way to implement background style (color) for each element, to reduce the file size
 - Improve the width (and height) of a pixel, when the adjacent pixels are the same, in order to remove repetitive pixels and improve file size 
