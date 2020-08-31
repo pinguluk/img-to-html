@@ -21,7 +21,7 @@ if (args.output):
 else:
     file = open('index.html', 'w')
 # write basic stuff
-file.write('<!DOCTYPE html><html><head><style>#image{display:flex;flex-direction:column}i{display:inline-block;float:left;width:1px;height:1px;}</style></head><body><div id="image">')
+file.write('<!DOCTYPE html><html><head><style>#img{display:flex;flex-direction:column}i{display:inline-block;float:left;width:1px;height:1px;}</style></head><body><div id="img">')
 
 #image height & width
 width, height = image.size
@@ -29,7 +29,7 @@ width, height = image.size
 # loop rows
 for y in range(height):
     # create row div
-    file.write('<div class="row">')
+    file.write('<d>')
     # loop columns
     for x in range(width):
         # print current pixel
@@ -44,19 +44,24 @@ for y in range(height):
             g = str(pixeldata[x,y][1])
             b = str(pixeldata[x,y][2])
             a = str(format(pixeldata[x,y][3]/255, '.2f'))
+
             # if a == 0.00, set it to 0 so we minify the output
             if a == '0.00':
                 a = '0'
             # else if a == 1.00, set it to 0 so we minify the output as well
             elif a == '1.00':
                 a = '1'
-            rgbaValue = "rgb(" +  r + ',' +  g + ',' + b +',' + a + ")"
-            # print rgbaValue
-            #print(rgbaValue)
+
             # write current pixel
-            file.write('<i style="background:' + rgbaValue + '"></i>')
+            # if a != 1, then add a
+            if a != '1':
+                file.write('<i style="background:' + "rgb(" +  r + ',' +  g + ',' + b +',' + a + ")" + '"></i>')
+            # else, we don't add a (1), in order to reduce filesize and performance
+            else:
+                file.write('<i style="background:' + "rgb(" +  r + ',' +  g + ',' + b + ")" + '"></i>')
+
     # close row div
-    file.write('</div>')
+    file.write('</d>')
 
 # close "image" div
 file.write('</div>')
