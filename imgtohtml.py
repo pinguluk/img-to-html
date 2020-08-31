@@ -50,7 +50,7 @@ for y in range(height):
             # else if a == 1.00, set it to 0 so we minify the output as well
             elif a == '1.00':
                 a = '1'
-            rgbaValue = "rgb(" +  r + ', ' +  g + ', ' + b +', ' + a + ")"
+            rgbaValue = "rgb(" +  r + ',' +  g + ',' + b +',' + a + ")"
             # print rgbaValue
             #print(rgbaValue)
             # write current pixel
